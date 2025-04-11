@@ -11,13 +11,11 @@ MODULE_NAME="NOTSPECIFIED"
 MODULE_TITLE="NOTSPECIFIED"
 MODULE_AUTHOR="NOTSPECIFIED"
 MODULE_DESC="NOTSPECIFIED"
-SLASH="/"
 SED_LOCALE="-i"
 MAC="0"
 
 if [[ $OSTYPE == 'darwin'* ]]; then
     MAC="1"
-    SLASH=""
     SED_LOCALE="-i.pbak"
 fi
 
@@ -58,18 +56,18 @@ create_from_template() {
 
     cp -r Misc/module-template $MODULE_NAME
 
-    grep -rl examplemodule $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/examplemodule/$MODULE_NAME/g"
-    grep -rl example-module $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/example-module/$MODULE_NAME/g"
-    grep -rl example-service $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/example-service/$MODULE_NAME/g"
-    grep -rl ExampleModuleComponent $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/ExampleModuleComponent/${MODULE_NAME}Component/g"
-    grep -rl ExampleServiceService $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/ExampleServiceService/${MODULE_NAME}Service/g"
-    grep -rl ExampleModuleModule $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/ExampleModuleModule/${MODULE_NAME}Module/g"
+    grep -rl examplemodule $MODULE_NAME/ | xargs sed $SED_LOCALE "s/examplemodule/$MODULE_NAME/g"
+    grep -rl example-module $MODULE_NAME/ | xargs sed $SED_LOCALE "s/example-module/$MODULE_NAME/g"
+    grep -rl example-service $MODULE_NAME/ | xargs sed $SED_LOCALE "s/example-service/$MODULE_NAME/g"
+    grep -rl ExampleModuleComponent $MODULE_NAME/ | xargs sed $SED_LOCALE "s/ExampleModuleComponent/${MODULE_NAME}Component/g"
+    grep -rl ExampleServiceService $MODULE_NAME/ | xargs sed $SED_LOCALE "s/ExampleServiceService/${MODULE_NAME}Service/g"
+    grep -rl ExampleModuleModule $MODULE_NAME/ | xargs sed $SED_LOCALE "s/ExampleModuleModule/${MODULE_NAME}Module/g"
     
-    grep -rl "the Example Module!" $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/the Example Module!/${MODULE_NAME}/g"
+    grep -rl "the Example Module!" $MODULE_NAME/ | xargs sed $SED_LOCALE "s/the Example Module!/${MODULE_NAME}/g"
     echo "here"
-    grep -rl ": \"Example Module" $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/: \"Example Module/: \"${MODULE_TITLE}/g"
-    grep -rl "An example module!" $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/An example module!/${MODULE_DESC}/g"
-    grep -rl ": \"Hak5" $MODULE_NAME$SLASH | xargs sed $SED_LOCALE "s/: \"Hak5/: \"${MODULE_AUTHOR}/g"
+    grep -rl ": \"Example Module" $MODULE_NAME/ | xargs sed $SED_LOCALE "s/: \"Example Module/: \"${MODULE_TITLE}/g"
+    grep -rl "An example module!" $MODULE_NAME/ | xargs sed $SED_LOCALE "s/An example module!/${MODULE_DESC}/g"
+    grep -rl ": \"Hak5" $MODULE_NAME/ | xargs sed $SED_LOCALE "s/: \"Hak5/: \"${MODULE_AUTHOR}/g"
 
     mv $MODULE_NAME/projects/examplemodule $MODULE_NAME/projects/$MODULE_NAME
     mv $MODULE_NAME/projects/$MODULE_NAME/src/lib/components/example-module.component.html $MODULE_NAME/projects/$MODULE_NAME/src/lib/components/$MODULE_NAME.component.html
